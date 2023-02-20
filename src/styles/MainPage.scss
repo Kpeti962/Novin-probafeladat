@@ -1,0 +1,58 @@
+.mainpage-section {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  .bg-img {
+    position: absolute;
+    width: 100%;
+    height: 105vh;
+    opacity: 0.2;
+  }
+
+
+  .account-creating {
+    transform: translateZ(1px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    img {
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      filter: grayscale(100%);
+      &:hover {
+        transform: scale(1.15);
+        transition: all ease-in-out 1.4s;
+        filter: grayscale(0%);
+        cursor: pointer;
+      }
+    }
+  }
+  .account-list {
+    transform: translateZ(1px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    img {
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      filter: grayscale(100%);
+      &:hover {
+        transform: scale(1.15);
+        transition: all ease-in-out 1.4s;
+        filter: grayscale(0%);
+        cursor: pointer;
+      }
+    }
+  }
+}
