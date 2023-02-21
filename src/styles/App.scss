@@ -10,6 +10,9 @@
     height: 95vh;
     background: var(--bg-color3)
 }
+textarea{
+  resize: none;
+}
 
 
 
@@ -18,3 +21,4 @@
   @import "./EntryPage.scss";
   @import "./Registration.scss";
   @import "./MainPage.scss";
+  @import "./AccountCreation.scss";

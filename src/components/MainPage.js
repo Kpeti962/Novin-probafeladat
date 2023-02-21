@@ -2,6 +2,7 @@ import React from "react";
 import list from "../img/list.png";
 import create from "../img/create.png";
 import bgImg from "../img/background-img.png";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   return (
@@ -10,12 +11,12 @@ const MainPage = () => {
       <div className="mainpage-section">
         <img className="bg-img" src={bgImg} alt="" />
         <div className="account-creating">
-          <img src={create} alt="" />
+        <Link to={"/createAccount"}><img src={create} alt="" /></Link>
           <h3>Számla létrehozása</h3>
         </div>
         <div className="account-list">
-          <img src={list} alt="" />
-          <h3>Számla létrehozása</h3>
+          <Link to={"/accountsLists"}><img src={list} alt="" /></Link>
+          <h3>Számlák listája</h3>
         </div>
       </div>
     </>
