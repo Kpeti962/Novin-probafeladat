@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import Alert from "react-bootstrap/Alert";
 
-const EntryPage = () => {
+const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
   const [loginUserName, setLoginUserName] = useState("");
   const [loginpassword, setLoginpassword] = useState("");
-  const [ableToLogin, setAbleToLogin] = useState(false);
+
+  const navigate = useNavigate();
 
   const usernameHandler = (e) => {
     setLoginUserName(e.target.value);
@@ -13,23 +17,57 @@ const EntryPage = () => {
     setLoginpassword(e.target.value);
   };
 
-  const loginHandler = () => {
-   
+  const loginHandler = async () => {
     const entryUser = JSON.parse(localStorage.getItem("user"));
 
-     if (
+    if (
       entryUser.username === loginUserName &&
       entryUser.password === loginpassword
-      ) {
-      setAbleToLogin(true);
-      console.log("jó");
+    ) {
+      const currentTime = [
+        new Date().getFullYear() +
+          "." +
+          new Date().getMonth(+1) +
+          "." +
+          new Date().getDate() +
+          " " +
+          new Date().getHours() +
+          ":" +
+          new Date().getMinutes(),
+      ];
+      setUser({ ...user, entryTime: currentTime });
+
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      storedUser.entryTime = currentTime;
+
+      localStorage.setItem("user", JSON.stringify(storedUser));
+
+      navigate("/mainpage");
     } else {
-      console.log("nem jó");
+      setDangerAlert(true);
+      setTimeout(() => {
+        setDangerAlert(false);
+      }, 2000);
     }
+    return;
   };
 
   return (
-    <div className="entry-section">
+    <motion.div
+      initial={{ opacity: 1, x: -400 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -400 }}
+      transition={{ duration: 0.4 }}
+      className="entry-section"
+    >
+      {dangerAlert && (
+        <Alert
+          variant="danger"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          A felhasználónév vagy a jelszó nem egyezik
+        </Alert>
+      )}
       <div className="login-inputs">
         <input
           placeholder="Felhasználónév"
@@ -45,14 +83,13 @@ const EntryPage = () => {
         />
       </div>
       <div className="entrypage-buttons">
-        <Link to={ableToLogin ? "/mainpage" : "/entry"}>
-          <button onClick={loginHandler}>Belépés</button>
-        </Link>
+        <button onClick={loginHandler}>Belépés</button>
+
         <Link to={"/registration"}>
           <button>Regisztráció</button>
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

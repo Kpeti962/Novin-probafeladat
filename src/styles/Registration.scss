@@ -1,26 +1,22 @@
 .form {
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .form-body {
+    div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+  }
+}
 
-    min-width: 350px;
-    .username {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
-    .password {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
-    .confirm-password {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
+@media screen and (max-width: 450px) {
+  .form-body{
+    div{
+      flex-direction: column;
     }
   }
 }

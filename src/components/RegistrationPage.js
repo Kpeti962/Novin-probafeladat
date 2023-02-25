@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const RegistrationPage = ({ user, setUser }) => {
-
-
-
-
-
-
+  const nameHandler = (e) => {
+    setUser({ ...user, name: e.target.value });
+    console.log(e.target.value);
+  };
   const usernameHandler = (e) => {
     setUser({ ...user, username: e.target.value });
     console.log(e.target.value);
@@ -22,20 +21,39 @@ const RegistrationPage = ({ user, setUser }) => {
   };
 
   const registrationSubmit = () => {
-
-    
-    
     if (user.password === user.confirmPassword) {
       console.log("jó");
-      localStorage.setItem("user", JSON.stringify(user))
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser({
+        name: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+        entryTime: {},
+      });
     } else {
       console.log("nem jó");
     }
     console.log(user);
   };
   return (
-    <div className="form">
+    <motion.div
+      initial={{ opacity: 1, x: 400 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 400 }}
+      transition={{ duration: 0.4 }}
+      className="form"
+    >
       <div className="form-body">
+        <div className="name">
+          <label htmlFor="name">Felhasználónév </label>
+          <input
+            id="name"
+            placeholder="Név"
+            value={user.name}
+            onChange={nameHandler}
+          />
+        </div>
         <div className="username">
           <label htmlFor="username">Felhasználónév </label>
           <input
@@ -74,7 +92,7 @@ const RegistrationPage = ({ user, setUser }) => {
           Regisztráció
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,18 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Alert from "react-bootstrap/Alert";
+import { motion } from "framer-motion";
 
-const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
+const AccountCreation = ({ account, setAccount, accounts, setAccounts, successAlert, setSuccessAlert, dangerAlert, setDangerAlert }) => {
+ 
+
   useEffect(() => {
-  
-  
-  
-  }, [])
-  
-
-
+    if (accounts.length > 0) {
+      localStorage.setItem("accounts", JSON.stringify(accounts));
+    }
+  }, [accounts]);
 
   const saveNameHandler = (e) => {
-    setAccount({...account, name: e.target.value,});
+    setAccount({ ...account, name: e.target.value });
   };
   const saveDateOfIssueHandler = (e) => {
     setAccount({ ...account, dateOfIssue: e.target.value });
@@ -31,12 +33,60 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
   };
 
   const saveAccountHandler = (e) => {
-    console.log(e.target.value);
-    console.log(account);
+    e.preventDefault();
+    if (
+      account.name.length > 0 &&
+      account.dateOfIssue.length > 0 &&
+      account.dueDate.length > 0 &&
+      account.itemName.length > 0 &&
+      account.price.length > 0
+    ) {
+      setSuccessAlert(true);
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+      setAccounts([...accounts, account]);
+      setAccount({
+        name: "",
+        dateOfIssue: "",
+        dueDate: "",
+        itemName: "",
+        price: "",
+        comment: "",
+      });
+    } else {
+      setDangerAlert(true);
+      setTimeout(() => {
+        setDangerAlert(false);
+      }, 2000);
+    }
   };
 
   return (
-    <div className="account-creating-section">
+    <motion.div
+      initial={{ opacity: 0, y: -400 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -400 }}
+      transition={{ duration: 0.4}}
+      className="account-creating-section"
+    >
+      {successAlert && (
+        <Alert
+          variant="success"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          Számla sikeresen rögzítve
+        </Alert>
+      )}
+      {dangerAlert && (
+        <Alert
+          variant="danger"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          Töltsd ki a kötelező mezőket
+        </Alert>
+      )}
+      <h2>Számla készítése</h2>
       <div className="date-of-issue">
         <label htmlFor="date-of-issue">Kiállítás dátuma</label>
         <input
@@ -44,6 +94,7 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
           id="date-of-issue"
           value={account.dateOfIssue}
           onChange={saveDateOfIssueHandler}
+          required
         />
       </div>
       <div className="due-date">
@@ -53,11 +104,17 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
           id="due-date"
           value={account.dueDate}
           onChange={saveDueDateHandler}
+          required
         />
       </div>
       <div className="name">
         <label htmlFor="name">Vásárló neve</label>
-        <input id="name" value={account.name} onChange={saveNameHandler} />
+        <input
+          id="name"
+          value={account.name}
+          onChange={saveNameHandler}
+          required
+        />
       </div>
       <div className="item-name">
         <label htmlFor="item-name">Tétel neve</label>
@@ -65,15 +122,17 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
           id="item-name"
           value={account.itemName}
           onChange={saveItemNameHandler}
+          required
         />
       </div>
       <div className="price">
-        <label htmlFor="price">Ár</label>
+        <label htmlFor="price">Ár (Ft)</label>
         <input
           type="number"
           id="price"
           value={account.price}
           onChange={savePriceHandler}
+          required
         />
       </div>
       <div className="comment">
@@ -87,11 +146,14 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts }) => {
       </div>
       <div className="footer">
         <Link to={"/mainpage"}>
-          <button>Mégsem</button>
+          <button>Menü</button>
         </Link>
         <button onClick={saveAccountHandler}>Mentés</button>
+        <Link to={"/accountsLists"}>
+          <button>Ugrás a számlákhoz</button>
+        </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
