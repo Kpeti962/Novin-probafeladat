@@ -13,7 +13,7 @@ const NotFound = () => {
     <div className='d-flex flex-column justify-content-center align-items-center'>
       <h1>Upsz. Valami rosszul sült el :(</h1>
       <h2>Az oldal nem elérhető vagy nincs jogosultságod hozzá.</h2>
-      <motion.button whileTap={{ scale: 0.85 }} onClick={backtToLoginHandler}>Vissza a bejelentkezéshez</motion.button>
+      <motion.button whileTap={{ scale: 0.85 }} onClick={backtToLoginHandler}>Ugrás a bejelentkezéshez</motion.button>
     </div>
   )
 }
