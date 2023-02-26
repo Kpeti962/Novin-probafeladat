@@ -12,6 +12,7 @@ const RegistrationPage = ({
   setSuccessAlert,
 }) => {
   const [passwordMatch, setPasswordMatch] = useState(false);
+  const [enoughCharacter, setEnoughCharacter] = useState(false);
   const nameHandler = (e) => {
     setUser({ ...user, name: e.target.value });
   };
@@ -30,7 +31,7 @@ const RegistrationPage = ({
       user.name.length > 0 &&
       user.username.length > 0 &&
       user.password.length > 0 &&
-      user.confirmPassword.length > 0 &&
+      user.confirmPassword.length > 7 &&
       user.password === user.confirmPassword
     ) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -59,6 +60,11 @@ const RegistrationPage = ({
       setPasswordMatch(true);
       setTimeout(() => {
         setPasswordMatch(false);
+      }, 2000);
+    } else if(user.confirmPassword.length < 8) {
+      setEnoughCharacter(true)
+      setTimeout(() => {
+        setEnoughCharacter(false);
       }, 2000);
     }
   };
@@ -92,6 +98,14 @@ const RegistrationPage = ({
           className="position-absolute top-0 d-flex justify-content-center"
         >
           A jelszavaknak egyezőnek kell lennie
+        </Alert>
+      )}
+      {enoughCharacter && (
+        <Alert
+          variant="danger"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          A jelszónak legalább 8 karakternek kell lennie
         </Alert>
       )}
       <div className="form-body">

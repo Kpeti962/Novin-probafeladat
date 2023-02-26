@@ -24,10 +24,27 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
       entryUser.username === loginUserName &&
       entryUser.password === loginpassword
     ) {
+      const month = [
+        "Jan",
+        "Febr",
+        "Már",
+        "Ápr",
+        "Máj",
+        "Jún",
+        "Júl",
+        "Aug",
+        "Szept",
+        "Okt",
+        "Nov",
+        "Dec",
+      ];
+
+      const d = new Date();
+      let name = month[d.getMonth()];
       const currentTime = [
         new Date().getFullYear() +
           "." +
-          new Date().getMonth(+1) +
+          name +
           "." +
           new Date().getDate() +
           " " +
@@ -35,10 +52,11 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
           ":" +
           new Date().getMinutes(),
       ];
-      setUser({ ...user, entryTime: currentTime });
+      setUser({ ...user, entryTime: currentTime, isLoggedIn: true });
 
       const storedUser = JSON.parse(localStorage.getItem("user"));
       storedUser.entryTime = currentTime;
+      storedUser.isLoggedIn = true;
 
       localStorage.setItem("user", JSON.stringify(storedUser));
 

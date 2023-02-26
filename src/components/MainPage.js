@@ -6,15 +6,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BiUserCircle } from "react-icons/bi";
 
-const MainPage = () => {
-  const navigate = useNavigate();
-
-  const [loginDatas, setLoginDatas] = useState({});
+const MainPage = ({ user, setUser }) => {
   useEffect(() => {
-    setLoginDatas(JSON.parse(localStorage.getItem("user")));
+    setUser(
+      JSON.parse(localStorage.getItem("user")) ?? {
+        name: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+        entryTime: "",
+        isLoggedIn: false,
+      }
+    );
   }, []);
-
+  const navigate = useNavigate();
+  console.log(user);
   const logOutHandler = () => {
+    console.log(user);
+    setUser({ ...user, isLoggedIn: false });
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...user, isLoggedIn: false })
+    );
     navigate("/entry");
   };
 
@@ -25,12 +39,16 @@ const MainPage = () => {
       exit={{ opacity: 0, y: 400 }}
       transition={{ duration: 0.4 }}
     >
-      {loginDatas && (
+      {user && (
         <div className="login-datas d-flex justify-content-between">
-          <span className="d-flex justify-content-center align-items-center">Bejelentkezés ideje: {loginDatas.entryTime}</span>
-          <span className="d-flex justify-content-center align-items-center">Üdvözlünk: {loginDatas.name}</span>
+          <span className="d-flex justify-content-center align-items-center">
+            Bejelentkezés ideje: {user.entryTime}
+          </span>
+          <span className="d-flex justify-content-center align-items-center">
+            Üdvözlünk: {user.name}
+          </span>
           <div className="d-flex justify-content-center align-items-center">
-            <span>{loginDatas.username}</span>
+            <span>{user.username}</span>
             <BiUserCircle className="text-white" size={20} />
           </div>
           <button onClick={logOutHandler}>Kijelentkezés</button>

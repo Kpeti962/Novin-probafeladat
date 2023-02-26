@@ -95,7 +95,7 @@ const AccountCreation = ({
       )}
       <h2 className="mb-5">Számla készítése</h2>
       <div className="date-of-issue">
-        <label htmlFor="date-of-issue">Kiállítás dátuma</label>
+        <label htmlFor="date-of-issue">Kiállítás dátuma *</label>
         <input
           type="date"
           id="date-of-issue"
@@ -105,7 +105,7 @@ const AccountCreation = ({
         />
       </div>
       <div className="due-date">
-        <label htmlFor="due-date">Esedékesség dátuma</label>
+        <label htmlFor="due-date">Esedékesség dátuma *</label>
         <input
           type="date"
           id="due-date"
@@ -115,7 +115,7 @@ const AccountCreation = ({
         />
       </div>
       <div className="name">
-        <label htmlFor="name">Vásárló neve</label>
+        <label htmlFor="name">Vásárló neve  -</label>
         <input
           id="name"
           value={account.name}
@@ -124,7 +124,7 @@ const AccountCreation = ({
         />
       </div>
       <div className="item-name">
-        <label htmlFor="item-name">Tétel neve</label>
+        <label htmlFor="item-name">Tétel neve *</label>
         <input
           id="item-name"
           value={account.itemName}
@@ -133,7 +133,7 @@ const AccountCreation = ({
         />
       </div>
       <div className="price">
-        <label htmlFor="price">Ár (Ft)</label>
+        <label htmlFor="price">Ár(Ft) *</label>
         <input
           type="number"
           id="price"
