@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Alert from "react-bootstrap/Alert";
@@ -13,6 +13,24 @@ const RegistrationPage = ({
 }) => {
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [enoughCharacter, setEnoughCharacter] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
+
+  useEffect(() => {
+    // Use useEffect to update the disableSubmit state variable whenever any input value changes
+    if (
+      user.name.length > 0 &&
+      user.username.length > 0 &&
+      user.password.length > 0 &&
+      user.confirmPassword.length > 0 &&
+      user.confirmPassword.length >= 8 &&
+      user.password === user.confirmPassword
+    ) {
+      setDisableSubmit(false);
+    } else {
+      setDisableSubmit(true);
+    }
+  }, [user]);
+
   const nameHandler = (e) => {
     setUser({ ...user, name: e.target.value });
   };
@@ -26,7 +44,7 @@ const RegistrationPage = ({
     setUser({ ...user, confirmPassword: e.target.value });
   };
 
-  const registrationSubmit = async () => {
+  const registrationSubmit = () => {
     if (
       user.name.length > 0 &&
       user.username.length > 0 &&
@@ -61,8 +79,8 @@ const RegistrationPage = ({
       setTimeout(() => {
         setPasswordMatch(false);
       }, 2000);
-    } else if(user.confirmPassword.length < 8) {
-      setEnoughCharacter(true)
+    } else if (user.confirmPassword.length < 8) {
+      setEnoughCharacter(true);
       setTimeout(() => {
         setEnoughCharacter(false);
       }, 2000);
@@ -149,10 +167,18 @@ const RegistrationPage = ({
         </div>
       </div>
       <div class="footer">
-        <Link to={"/entry"}>
-          <motion.button whileTap={{ scale: 0.85 }} class="back-btn">Vissza</motion.button>
+        <Link to={"/"}>
+          <motion.button whileTap={{ scale: 0.85 }} class="back-btn">
+            Vissza
+          </motion.button>
         </Link>
-        <motion.button whileTap={{ scale: 0.85 }} onClick={registrationSubmit} type="submit" class="submit-btn">
+        <motion.button
+          disabled={disableSubmit}
+          whileTap={{ scale: 0.85 }}
+          onClick={registrationSubmit}
+          type="submit"
+          class="submit-btn"
+        >
           Regisztráció
         </motion.button>
       </div>

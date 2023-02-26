@@ -44,7 +44,7 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
-            path="/entry"
+            path="/"
             element={
               <EntryPage
                 user={user}

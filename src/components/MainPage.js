@@ -20,16 +20,14 @@ const MainPage = ({ user, setUser }) => {
     );
   }, []);
   const navigate = useNavigate();
-  console.log(user);
   const logOutHandler = () => {
-    console.log(user);
     setUser({ ...user, isLoggedIn: false });
 
     localStorage.setItem(
       "user",
       JSON.stringify({ ...user, isLoggedIn: false })
     );
-    navigate("/entry");
+    navigate("/");
   };
 
   return (
@@ -51,7 +49,9 @@ const MainPage = ({ user, setUser }) => {
             <span>{user.username}</span>
             <BiUserCircle className="text-white" size={20} />
           </div>
-          <motion.button whileTap={{ scale: 0.85 }} onClick={logOutHandler}>Kijelentkezés</motion.button>
+          <motion.button whileTap={{ scale: 0.85 }} onClick={logOutHandler}>
+            Kijelentkezés
+          </motion.button>
         </div>
       )}
       <div className="mainpage-section d-flex justify-content-evenly align-items-center position-relative">

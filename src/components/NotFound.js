@@ -7,7 +7,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   const backtToLoginHandler = () =>{
-    navigate("/entry")
+    navigate("/")
   }
   return (
     <div className='d-flex flex-column justify-content-center align-items-center'>
