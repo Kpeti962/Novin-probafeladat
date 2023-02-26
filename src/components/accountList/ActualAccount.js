@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 const ActualAccount = ({ accounts }) => {
   const { accountId } = useParams();
@@ -8,7 +10,7 @@ const ActualAccount = ({ accounts }) => {
   return (
     <div className="h-100 bg-light">
       <Link to={"/accountsLists"}>
-        <button>Vissza</button>
+        <motion.button whileTap={{ scale: 0.85 }}>Vissza</motion.button>
       </Link>
       <h3 className="d-flex justify-content-center">
         Számla #{Number(accountId) + 1}

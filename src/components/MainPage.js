@@ -51,20 +51,20 @@ const MainPage = ({ user, setUser }) => {
             <span>{user.username}</span>
             <BiUserCircle className="text-white" size={20} />
           </div>
-          <button onClick={logOutHandler}>Kijelentkezés</button>
+          <motion.button whileTap={{ scale: 0.85 }} onClick={logOutHandler}>Kijelentkezés</motion.button>
         </div>
       )}
       <div className="mainpage-section d-flex justify-content-evenly align-items-center position-relative">
         <img className="bg-img" src={bgImg} alt="" />
         <div className="account-creating">
           <Link to={"/createAccount"}>
-            <img src={create} alt="" />
+            <motion.img whileTap={{ scale: 0.85 }} src={create} alt="" />
           </Link>
           <h3>Számla létrehozása</h3>
         </div>
         <div className="account-list">
           <Link to={"/accountsLists"}>
-            <img src={list} alt="" />
+            <motion.img whileTap={{ scale: 0.85 }} src={list} alt="" />
           </Link>
           <h3>Számlák listája</h3>
         </div>

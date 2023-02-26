@@ -153,11 +153,11 @@ const AccountCreation = ({
       </div>
       <div className="footer">
         <Link to={"/mainpage"}>
-          <button>Menü</button>
+          <motion.button whileTap={{ scale: 0.85 }}>Menü</motion.button>
         </Link>
-        <button onClick={saveAccountHandler}>Mentés</button>
+        <motion.button whileTap={{ scale: 0.85 }} onClick={saveAccountHandler}>Mentés</motion.button>
         <Link to={"/accountsLists"}>
-          <button>Ugrás a számlákhoz</button>
+          <motion.button whileTap={{ scale: 0.85 }}>Ugrás a számlákhoz</motion.button>
         </Link>
       </div>
     </motion.div>

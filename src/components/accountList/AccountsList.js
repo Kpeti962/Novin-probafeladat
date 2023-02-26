@@ -53,12 +53,12 @@ const AccountsList = ({ accounts, setAccounts }) => {
               <th>{account.comment}</th>
               <th>
                 <div className="d-flex align-items-center">
-                  <button onClick={() => viewAccountHandler(key)}>
+                  <motion.button whileTap={{ scale: 0.85 }} onClick={() => viewAccountHandler(key)}>
                     Megtekint
-                  </button>
-                  <button onClick={() => deleteHandler(account.itemName, key)}>
+                  </motion.button>
+                  <motion.button whileTap={{ scale: 0.85 }} onClick={() => deleteHandler(account.itemName, key)}>
                     Törlés
-                  </button>
+                  </motion.button>
                 </div>
               </th>
             </tr>
@@ -72,10 +72,10 @@ const AccountsList = ({ accounts, setAccounts }) => {
       )}
       <div>
         <Link to={"/mainpage"}>
-          <button>Menü</button>
+          <motion.button whileTap={{ scale: 0.85 }}>Menü</motion.button>
         </Link>
         <Link to={"/createAccount"}>
-          <button>Számla készítése</button>
+          <motion.button whileTap={{ scale: 0.85 }}>Számla készítése</motion.button>
         </Link>
       </div>
     </motion.div>

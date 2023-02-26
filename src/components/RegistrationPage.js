@@ -150,11 +150,11 @@ const RegistrationPage = ({
       </div>
       <div class="footer">
         <Link to={"/entry"}>
-          <button class="back-btn">Vissza</button>
+          <motion.button whileTap={{ scale: 0.85 }} class="back-btn">Vissza</motion.button>
         </Link>
-        <button onClick={registrationSubmit} type="submit" class="submit-btn">
+        <motion.button whileTap={{ scale: 0.85 }} onClick={registrationSubmit} type="submit" class="submit-btn">
           Regisztráció
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );

@@ -101,9 +101,9 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
         />
       </div>
       <div className="entrypage-buttons d-flex text-align-center justify-content-center">
-        <button onClick={loginHandler}>Belépés</button>
+        <motion.button whileTap={{ scale: 0.85 }} onClick={loginHandler}>Belépés</motion.button>
         <Link to={"/registration"}>
-          <button>Regisztráció</button>
+          <motion.button whileTap={{ scale: 0.85 }}>Regisztráció</motion.button>
         </Link>
       </div>
     </motion.div>
