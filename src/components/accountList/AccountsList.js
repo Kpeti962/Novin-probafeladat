@@ -1,24 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Route, Routes, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import ActualAccount from "./ActualAccount";
 
 const AccountsList = ({ accounts, setAccounts }) => {
   const navigate = useNavigate();
-  const location = useLocation({});
 
   const viewAccountHandler = (key) => {
- /*    navigate(`/${key + 1}`); */
-    console.log(key + 1);
+    navigate(`/id/${key}`);
   };
 
   const deleteHandler = (itemName, key) => {
-    const updatedAccounts = accounts.filter((account, index) => index !== key);
-  setAccounts(updatedAccounts);
-    console.log();
-  }
+    if (window.confirm("Valóban törölni szeretnéd a számlát?")) {
+      const updatedAccounts = accounts.filter(
+        (account, index) => index !== key
+      );
+      setAccounts(updatedAccounts);
+      localStorage.setItem("accounts", JSON.stringify(updatedAccounts));
+    }
+  };
 
   return (
     <motion.div
@@ -26,7 +26,7 @@ const AccountsList = ({ accounts, setAccounts }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -400 }}
       transition={{ duration: 0.4 }}
-      className="container"
+      className="container overflow-auto min-vh-100"
     >
       <table className="table">
         <thead>
@@ -42,9 +42,7 @@ const AccountsList = ({ accounts, setAccounts }) => {
           </tr>
         </thead>
         <tbody>
-          {accounts.map((account, key) =>
-        
-         (
+          {accounts.map((account, key) => (
             <tr key={key}>
               <th>{key + 1}</th>
               <th>{account.name}</th>
@@ -58,14 +56,9 @@ const AccountsList = ({ accounts, setAccounts }) => {
                   <button onClick={() => viewAccountHandler(key)}>
                     Megtekint
                   </button>
-                  <button onClick={() => deleteHandler(account.itemName, key)}>Törlés</button>
-
-                  <Routes location={location} key={location.pathname}>
-                    <Route
-                      path={`/${key + 1}`}
-                      element={<ActualAccount account={account} />}
-                    ></Route>
-                  </Routes>
+                  <button onClick={() => deleteHandler(account.itemName, key)}>
+                    Törlés
+                  </button>
                 </div>
               </th>
             </tr>

@@ -1,45 +1,30 @@
 .entry-section {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   .login-inputs {
     min-width: 250px;
     margin: 0 20%;
-    text-align: center;
-    display: flex;
-    justify-content: space-evenly;
     margin-bottom: 30px;
     input {
       min-width: 200px;
- 
     }
   }
   .entrypage-buttons {
     min-width: 200px;
     margin: 0 20%;
-    text-align: center;
-    display: flex;
-    justify-content: space-evenly;
     button {
       width: 200px;
-  
     }
   }
 }
-
 @media screen and (max-width: 450px) {
   div {
     display: flex;
     flex-direction: column;
-   
 
     input,
     button {
-    width: 100%;
-    margin: 2.5px 0;
+      width: 100%;
+      margin: 2.5px 0;
     }
   }
 }

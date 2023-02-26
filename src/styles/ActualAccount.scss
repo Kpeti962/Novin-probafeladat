@@ -1,0 +1,16 @@
+.actual-account {
+  margin: 40px 20%;
+  .item-and-price {
+    background: var(--bg-color2);
+  }
+  h6 {
+    background: var(--bg-color2);
+  }
+}
+@media screen and (max-width: 950px) {
+  .actual-account {
+    .dates {
+      flex-direction: column;
+    }
+  }
+}

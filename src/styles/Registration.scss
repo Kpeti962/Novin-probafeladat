@@ -1,9 +1,4 @@
 .form {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   .form-body {
     div {
       display: flex;
@@ -14,8 +9,8 @@
 }
 
 @media screen and (max-width: 450px) {
-  .form-body{
-    div{
+  .form-body {
+    div {
       flex-direction: column;
     }
   }

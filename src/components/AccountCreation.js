@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
 import { motion } from "framer-motion";
 
-const AccountCreation = ({ account, setAccount, accounts, setAccounts, successAlert, setSuccessAlert, dangerAlert, setDangerAlert }) => {
- 
-
+const AccountCreation = ({
+  account,
+  setAccount,
+  accounts,
+  setAccounts,
+  successAlert,
+  setSuccessAlert,
+  dangerAlert,
+  setDangerAlert,
+}) => {
   useEffect(() => {
     if (accounts.length > 0) {
       localStorage.setItem("accounts", JSON.stringify(accounts));
@@ -67,8 +74,8 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts, successAl
       initial={{ opacity: 0, y: -400 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -400 }}
-      transition={{ duration: 0.4}}
-      className="account-creating-section"
+      transition={{ duration: 0.4 }}
+      className="account-creating-section d-flex flex-column align-items-center justify-content-center min-vh-100 overflow-auto"
     >
       {successAlert && (
         <Alert
@@ -86,7 +93,7 @@ const AccountCreation = ({ account, setAccount, accounts, setAccounts, successAl
           Töltsd ki a kötelező mezőket
         </Alert>
       )}
-      <h2>Számla készítése</h2>
+      <h2 className="mb-5">Számla készítése</h2>
       <div className="date-of-issue">
         <label htmlFor="date-of-issue">Kiállítás dátuma</label>
         <input

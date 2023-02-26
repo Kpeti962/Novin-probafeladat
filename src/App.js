@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles/App.scss";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -7,7 +7,8 @@ import RegistrationPage from "./components/RegistrationPage";
 import MainPage from "./components/MainPage";
 import AccountCreation from "./components/AccountCreation";
 import AccountsList from "./components/accountList/AccountsList";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import ActualAccount from "./components/accountList/ActualAccount";
 
 function App() {
   const [successAlert, setSuccessAlert] = useState(false);
@@ -51,7 +52,16 @@ function App() {
           ></Route>
           <Route
             path="/registration"
-            element={<RegistrationPage user={user} setUser={setUser} />}
+            element={
+              <RegistrationPage
+                dangerAlert={dangerAlert}
+                setDangerAlert={setDangerAlert}
+                successAlert={successAlert}
+                setSuccessAlert={setSuccessAlert}
+                user={user}
+                setUser={setUser}
+              />
+            }
           ></Route>
           <Route path="/mainpage" element={<MainPage user={user} />}></Route>
           <Route
@@ -75,6 +85,10 @@ function App() {
               <AccountsList accounts={accounts} setAccounts={setAccounts} />
             }
           ></Route>
+          <Route
+            path="/id/:accountId"
+            element={<ActualAccount accounts={accounts} />}
+          />
         </Routes>
       </AnimatePresence>
     </div>

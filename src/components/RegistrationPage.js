@@ -1,28 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import Alert from "react-bootstrap/Alert";
 
-const RegistrationPage = ({ user, setUser }) => {
+const RegistrationPage = ({
+  user,
+  setUser,
+  dangerAlert,
+  setDangerAlert,
+  successAlert,
+  setSuccessAlert,
+}) => {
+  const [passwordMatch, setPasswordMatch] = useState(false);
   const nameHandler = (e) => {
     setUser({ ...user, name: e.target.value });
-    console.log(e.target.value);
   };
   const usernameHandler = (e) => {
     setUser({ ...user, username: e.target.value });
-    console.log(e.target.value);
   };
   const passwordHandler = (e) => {
     setUser({ ...user, password: e.target.value });
-    console.log(e.target.value);
   };
   const confirmPasswordHandler = (e) => {
     setUser({ ...user, confirmPassword: e.target.value });
-    console.log(e.target.value);
   };
 
-  const registrationSubmit = () => {
-    if (user.password === user.confirmPassword) {
-      console.log("jó");
+  const registrationSubmit = async () => {
+    if (
+      user.name.length > 0 &&
+      user.username.length > 0 &&
+      user.password.length > 0 &&
+      user.confirmPassword.length > 0 &&
+      user.password === user.confirmPassword
+    ) {
       localStorage.setItem("user", JSON.stringify(user));
       setUser({
         name: "",
@@ -31,10 +41,26 @@ const RegistrationPage = ({ user, setUser }) => {
         confirmPassword: "",
         entryTime: {},
       });
-    } else {
-      console.log("nem jó");
+      setSuccessAlert(true);
+      setTimeout(() => {
+        setSuccessAlert(false);
+      }, 2000);
+    } else if (
+      user.name.length === 0 ||
+      user.username.length === 0 ||
+      user.password.length === 0 ||
+      user.confirmPassword.length === 0
+    ) {
+      setDangerAlert(true);
+      setTimeout(() => {
+        setDangerAlert(false);
+      }, 2000);
+    } else if (user.password !== user.confirmPassword) {
+      setPasswordMatch(true);
+      setTimeout(() => {
+        setPasswordMatch(false);
+      }, 2000);
     }
-    console.log(user);
   };
   return (
     <motion.div
@@ -42,8 +68,32 @@ const RegistrationPage = ({ user, setUser }) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 400 }}
       transition={{ duration: 0.4 }}
-      className="form"
+      className="form min-vh-100 d-flex flex-column justify-content-center align-items-center"
     >
+      {successAlert && (
+        <Alert
+          variant="success"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          Sikeres regisztráció
+        </Alert>
+      )}
+      {dangerAlert && (
+        <Alert
+          variant="danger"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          Minden mező kitöltése kötelező
+        </Alert>
+      )}
+      {passwordMatch && (
+        <Alert
+          variant="danger"
+          className="position-absolute top-0 d-flex justify-content-center"
+        >
+          A jelszavaknak egyezőnek kell lennie
+        </Alert>
+      )}
       <div className="form-body">
         <div className="name">
           <label htmlFor="name">Felhasználónév </label>

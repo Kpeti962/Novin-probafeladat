@@ -58,7 +58,7 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -400 }}
       transition={{ duration: 0.4 }}
-      className="entry-section"
+      className="entry-section d-flex flex-column align-items-center justify-content-center"
     >
       {dangerAlert && (
         <Alert
@@ -68,7 +68,7 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
           A felhasználónév vagy a jelszó nem egyezik
         </Alert>
       )}
-      <div className="login-inputs">
+      <div className="login-inputs d-flex justify-content-evenly text-align-center">
         <input
           placeholder="Felhasználónév"
           type="text"
@@ -82,9 +82,8 @@ const EntryPage = ({ user, setUser, dangerAlert, setDangerAlert }) => {
           onChange={passwordHandler}
         />
       </div>
-      <div className="entrypage-buttons">
+      <div className="entrypage-buttons d-flex text-align-center justify-content-center">
         <button onClick={loginHandler}>Belépés</button>
-
         <Link to={"/registration"}>
           <button>Regisztráció</button>
         </Link>
