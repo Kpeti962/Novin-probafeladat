@@ -128,7 +128,7 @@ const RegistrationPage = ({
       )}
       <div className="form-body">
         <div className="name">
-          <label htmlFor="name">Felhasználónév </label>
+          <label htmlFor="name">Név </label>
           <input
             id="name"
             placeholder="Név"
@@ -150,7 +150,7 @@ const RegistrationPage = ({
           <input
             type="password"
             id="password"
-            placeholder="Jelszó"
+            placeholder="(Legalább 8 karakter)"
             value={user.password}
             onChange={passwordHandler}
           />
@@ -160,7 +160,7 @@ const RegistrationPage = ({
           <input
             type="password"
             id="confirm-password"
-            placeholder="Jelszó megerősítése"
+            placeholder="(Legalább 8 karakter"
             value={user.confirmPassword}
             onChange={confirmPasswordHandler}
           />
