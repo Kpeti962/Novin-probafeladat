@@ -16,14 +16,12 @@ const RegistrationPage = ({
   const [disableSubmit, setDisableSubmit] = useState(true);
 
   useEffect(() => {
-    // Use useEffect to update the disableSubmit state variable whenever any input value changes
+ 
     if (
       user.name.length > 0 &&
       user.username.length > 0 &&
       user.password.length > 0 &&
-      user.confirmPassword.length > 0 &&
-      user.confirmPassword.length >= 8 &&
-      user.password === user.confirmPassword
+      user.confirmPassword.length > 0
     ) {
       setDisableSubmit(false);
     } else {
